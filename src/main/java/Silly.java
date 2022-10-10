@@ -11,22 +11,23 @@ import java.util.Arrays;
  * relevant readings for each task.
  */
 
-public class Silly implements Comparable<Silly>{
+public class Silly implements Comparable<Silly> {
     /**
      * 1. Java has variables known as "static" variables.
      * These are variables that exist in every instance of a class,
      * and which have the same value across all instances.
-     *
+     * <p>
      * Below we have created a static variable (signified by the keyword
      * static) named my_static. The countStatic() method makes use of this
      * static variable.
-     *
+     * <p>
      * (Relevant reading: 2.1. Static variables)
      */
     public static int my_static = 0;
 
     // For comparison, this is a non-static attribute.
     public String name;
+    private String s1;
 
     /**
      * Return the current value of my_static and increase my_static by 1.
@@ -80,6 +81,19 @@ public class Silly implements Comparable<Silly>{
      *       Make sure you document this method!
      */
 
+    /**
+     * creates a silly object.
+     * This constructer takes two strings as arguments and concatenates them to
+     * form the silly objects name.
+     * @param w1 First string
+     * @param w2 second string
+     */
+    public Silly(String w1, String w2) {
+        this.name = w1 + w2;
+    }
+
+
+
 
 
 
@@ -116,7 +130,7 @@ public class Silly implements Comparable<Silly>{
         y.countStatic();
         x.countStatic();
         x.countStatic();
-        int[] expected_values = {};
+        int[] expected_values = {0, 1, 2, 3};
 
         System.out.println("The countStatic calls will return " + Arrays.toString(expected_values));
     }
@@ -134,6 +148,7 @@ public class Silly implements Comparable<Silly>{
     @Override
     public String toString(){
         // TODO (Task 3): Implement the body of this method!
+        return this.name;
     }
 
     /**
@@ -158,7 +173,7 @@ public class Silly implements Comparable<Silly>{
         }
 
         Silly other = (Silly) o; // To access .name of o, we need to cast it.
-
+        return this.name.equals(other.toString());
         // Hint: to compare strings, we need to use .equals()
         //       e.g. s1.equals(s2)
     }
@@ -194,6 +209,16 @@ public class Silly implements Comparable<Silly>{
          *                You can get the length of a string by using the
          *                .length() method.
          */
+        int othLen = other.toString().length();
+        int thsLen = this.name.length();
+        if (thsLen > othLen) {
+            return 1;
+        } else if (thsLen < othLen) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
     }
 
     /*
